@@ -1,6 +1,6 @@
-# APPRIC Public Site
+# Smithy Systems Public Site
 
-A standalone public website for APPRIC. This project contains only the public-facing experience:
+A standalone public website for Smithy systems. This project contains only the public-facing experience:
 
 - Home
 - About
@@ -8,7 +8,6 @@ A standalone public website for APPRIC. This project contains only the public-fa
 - Portfolio
 - Contact
 
-The employee portal, authentication, dashboard, MongoDB connection, and blog are intentionally excluded.
 
 ## Run locally
 
