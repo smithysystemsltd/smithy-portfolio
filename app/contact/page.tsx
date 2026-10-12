@@ -1,5 +1,56 @@
-import { ArrowUpRight } from "lucide-react"
+import { ContactForm } from "@/app/contact/contact-form"
+import { contactFormContent, getProjectTypeFromService } from "@/app/data/contact"
 
-export default function ContactPage() {
-  return <main><section className="page-intro"><div className="shell"><p className="eyebrow">Start a conversation</p><h1>Tell us what you are trying to make.</h1><p>No perfect brief required. A few lines about the challenge is enough to get started.</p></div></section><section className="section"><div className="shell contact-grid"><div><p className="eyebrow">Contact Smithy</p><h2>Good questions welcome.</h2><div className="contact-details"><div><span>Email</span><a href="mailto:smithysystemsltd@gmail.com">smithysystemsltd@gmail.com</a></div> <div><span>Phone</span><a className="phone-number">0799749761</a></div><div><span>Based in</span><strong>Nairobi, Kenya / Working across Africa</strong></div><div><span>Typical response</span><strong>Within two business days</strong></div></div></div><form className="contact-form"><label>Name<input name="name" required placeholder="Your name" /></label><label>Email<input name="email" type="email" required placeholder="you@company.com" /></label><label>What are you working on?<textarea name="message" required placeholder="A website, product, platform, or something still taking shape..." /></label><button className="button button-dark" type="button" disabled>Submission paused</button><p>For now, please email <a href="mailto:smithysystemsltd@gmail.com">smithysystemsltd@gmail.com</a>.</p></form></div></section></main>
+type ContactPageProps = {
+  searchParams: Promise<{ service?: string | string[] }>
+}
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams
+  const service = Array.isArray(params.service) ? params.service[0] : params.service
+  const contactEmail = process.env.CONTACT_EMAIL || ""
+
+  return (
+    <main>
+      <section className="page-intro">
+        <div className="shell">
+          <p className="eyebrow">Start a conversation</p>
+          <h1>Tell us what you are trying to make.</h1>
+          <p>No perfect brief required. A few lines about the challenge is enough to get started.</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="shell contact-grid">
+          <div>
+            <p className="eyebrow">Contact Smithy</p>
+            <h2>Good questions welcome.</h2>
+            <div className="contact-details">
+              {contactEmail && (
+                <div>
+                  <span>Email</span>
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                </div>
+              )}
+              <div>
+                <span>Phone</span>
+                <a className="phone-number">0799749761</a>
+              </div>
+              <div>
+                <span>Based in</span>
+                <strong>Nairobi, Kenya / Working across Africa</strong>
+              </div>
+              <div>
+                <span>Typical response</span>
+                <strong>{contactFormContent.responseTime}</strong>
+              </div>
+            </div>
+          </div>
+          <ContactForm
+            contactEmail={contactEmail}
+            initialProjectType={getProjectTypeFromService(service)}
+          />
+        </div>
+      </section>
+    </main>
+  )
 }
