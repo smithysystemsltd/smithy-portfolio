@@ -3,6 +3,7 @@ import {
   projectTypeOptions,
   timelineOptions,
 } from "@/app/data/contact"
+import { siteConfig } from "@/config/site"
 
 const rateLimitWindowMs = 10 * 60 * 1000
 const rateLimitMaximum = 5
@@ -116,11 +117,9 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.RESEND_FROM_EMAIL
-  const recipient = process.env.CONTACT_TO_EMAIL
-  const contactEmail = process.env.CONTACT_EMAIL
-  if (!apiKey || !from || !recipient || !contactEmail) {
+  if (!apiKey || !from) {
     console.error(
-      "Contact email is not configured: set RESEND_API_KEY, RESEND_FROM_EMAIL, CONTACT_TO_EMAIL, and CONTACT_EMAIL.",
+      "Contact email is not configured: set RESEND_API_KEY and RESEND_FROM_EMAIL.",
     )
     return NextResponse.json(
       { error: "Email delivery is not configured." },
@@ -142,7 +141,7 @@ export async function POST(request: Request) {
   ].join("\n")
 
   const notification = {
-    to: [recipient],
+    to: [siteConfig.businessEmail],
     reply_to: email,
     subject: `New website enquiry from ${name}`,
     text: notificationText,
@@ -153,9 +152,9 @@ export async function POST(request: Request) {
     text: [
       `Hi ${name},`,
       "",
-      "Thanks for getting in touch with Smithy Systems. We have received your enquiry and will respond within two business days.",
+      `Thanks for getting in touch with Smithy Systems. We have received your enquiry and will respond ${siteConfig.responseTimePromise.toLowerCase()}.`,
       "",
-      `If you need to reach us directly, email ${contactEmail}.`,
+      `If you need to reach us directly, email ${siteConfig.businessEmail}.`,
       "",
       "Smithy Systems",
     ].join("\n"),

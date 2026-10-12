@@ -1,5 +1,6 @@
 import { ContactForm } from "@/app/contact/contact-form"
 import { contactFormContent, getProjectTypeFromService } from "@/app/data/contact"
+import { siteConfig } from "@/config/site"
 
 type ContactPageProps = {
   searchParams: Promise<{ service?: string | string[] }>
@@ -8,8 +9,6 @@ type ContactPageProps = {
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const params = await searchParams
   const service = Array.isArray(params.service) ? params.service[0] : params.service
-  const contactEmail = process.env.CONTACT_EMAIL || ""
-
   return (
     <main>
       <section className="page-intro">
@@ -25,29 +24,48 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <p className="eyebrow">Contact Smithy</p>
             <h2>Good questions welcome.</h2>
             <div className="contact-details">
-              {contactEmail && (
-                <div>
-                  <span>Email</span>
-                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-                </div>
-              )}
+              <div>
+                <span>Email</span>
+                <a href={`mailto:${siteConfig.businessEmail}`}>{siteConfig.businessEmail}</a>
+              </div>
               <div>
                 <span>Phone</span>
-                <a className="phone-number">0799749761</a>
+                <a href={`tel:${siteConfig.phone.tel}`}>{siteConfig.phone.display}</a>
               </div>
               <div>
                 <span>Based in</span>
-                <strong>Nairobi, Kenya / Working across Africa</strong>
+                <strong>{siteConfig.location}</strong>
               </div>
               <div>
                 <span>Typical response</span>
-                <strong>{contactFormContent.responseTime}</strong>
+                <strong>{siteConfig.responseTimePromise}</strong>
               </div>
+            </div>
+            <div className="contact-actions">
+              <a
+                className="button button-dark"
+                href={siteConfig.whatsapp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {siteConfig.whatsapp.label}
+              </a>
+              {siteConfig.bookingUrl && (
+                <a
+                  className="button button-outline"
+                  href={siteConfig.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {siteConfig.bookingLabel}
+                </a>
+              )}
             </div>
           </div>
           <ContactForm
-            contactEmail={contactEmail}
+            contactEmail={siteConfig.businessEmail}
             initialProjectType={getProjectTypeFromService(service)}
+            responseTimePromise={siteConfig.responseTimePromise}
           />
         </div>
       </section>

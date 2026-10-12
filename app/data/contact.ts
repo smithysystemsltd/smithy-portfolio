@@ -27,9 +27,8 @@ export const contactFormContent = {
   submit: "Send enquiry",
   submitting: "Sending...",
   successTitle: "Thanks for getting in touch.",
-  successMessage: "Your enquiry is on its way. We’ll be in touch within two business days.",
+  successMessage: "Your enquiry is on its way. We’ll be in touch",
   failureMessage: "We couldn’t send your message just now. Your details are still here; please try again",
-  responseTime: "Within two business days",
   validation: {
     requiredName: "Please enter your name.",
     requiredEmail: "Please enter your email address.",

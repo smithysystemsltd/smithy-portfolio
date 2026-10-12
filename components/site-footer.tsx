@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
+import { siteConfig } from "@/config/site"
 
 export function SiteFooter() {
   return (
@@ -18,13 +19,28 @@ export function SiteFooter() {
           </div>
           <div>
             <p className="footer-label">Connect</p>
-            <a href="mailto:hello@smithysystems.co.ke">hello@smithysystems.co.ke</a>
-            <a href="https://www.linkedin.com/">LinkedIn</a>
-            <a href="https://github.com/">GitHub</a>
+            <a href={`mailto:${siteConfig.businessEmail}`}>{siteConfig.businessEmail}</a>
+            <a href={`tel:${siteConfig.phone.tel}`}>{siteConfig.phone.display}</a>
+            <a href={siteConfig.whatsapp.url} target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+            {siteConfig.socialUrls.linkedin && (
+              <a href={siteConfig.socialUrls.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            )}
+            {siteConfig.socialUrls.github && (
+              <a href={siteConfig.socialUrls.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+            )}
           </div>
         </div>
       </div>
-      <div className="shell footer-bottom"><span>Nairobi, Kenya / Working across Africa</span><Link href="/contact">Say hello <ArrowUpRight size={15} /></Link></div>
+      <div className="shell footer-bottom">
+        <span>{siteConfig.location}</span>
+        <Link href="/contact">Say hello <ArrowUpRight size={15} /></Link>
+      </div>
     </footer>
   )
 }

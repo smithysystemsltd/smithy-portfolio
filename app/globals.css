@@ -66,6 +66,10 @@ main { overflow: hidden; }
 .contact-details { display: grid; gap: 24px; margin-top: 36px; }
 .contact-details span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 6px; }
 .contact-details a { font-size: 18px; font-weight: 700; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.button-outline { border-color: var(--line); background: transparent; color: var(--ink); }
+.whatsapp-float { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 9; display: grid; width: 52px; height: 52px; place-items: center; border-radius: 50%; background: #176b45; color: #fff; box-shadow: 0 4px 16px rgba(16,16,16,.24); }
+.whatsapp-float:hover { background: #125737; }
 .contact-form { display: grid; gap: 20px; padding: 32px; background: var(--steel); border: 1px solid var(--line); }
 .contact-form label { display: grid; gap: 8px; font-size: 13px; font-weight: 700; }
 .contact-form input, .contact-form select, .contact-form textarea { width: 100%; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 0; padding: 14px; font: inherit; }

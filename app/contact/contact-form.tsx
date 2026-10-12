@@ -52,9 +52,11 @@ function getErrors(values: ContactFormValues): FieldErrors {
 export function ContactForm({
   contactEmail,
   initialProjectType,
+  responseTimePromise,
 }: {
   contactEmail: string
   initialProjectType: ContactFormValues["projectType"]
+  responseTimePromise: string
 }) {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitError, setSubmitError] = useState("")
@@ -117,7 +119,7 @@ export function ContactForm({
     return (
       <div className="contact-form-status" role="status" aria-live="polite">
         <h3>{contactFormContent.successTitle}</h3>
-        <p>{contactFormContent.successMessage}</p>
+        <p>{contactFormContent.successMessage} {responseTimePromise.toLowerCase()}.</p>
       </div>
     )
   }

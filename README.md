@@ -33,11 +33,10 @@ Set these environment variables in `.env.local` for local development and in the
 ```env
 RESEND_API_KEY=re_your_api_key
 RESEND_FROM_EMAIL=Website enquiries <contact@your-verified-domain.com>
-CONTACT_TO_EMAIL=smithysystemsltd@gmail.com
-CONTACT_EMAIL=smithysystemsltd@gmail.com
+BOOKING_URL=
 ```
 
-Set the same variables in Vercel Project Settings > Environment Variables for each deployment environment. `CONTACT_TO_EMAIL` is the inbox for new enquiries; `CONTACT_EMAIL` is the public address shown to visitors and included in the acknowledgement. `RESEND_FROM_EMAIL` must use a domain verified with Resend, and the visitor's email is set as the reply-to address so enquiries can be answered directly.
+Set the same variables in Vercel Project Settings > Environment Variables for each deployment environment. Contact form enquiries and visitor acknowledgements use the business email configured in `config/site.ts`. Confirm that the mailbox receives mail before launch. Remove any legacy `CONTACT_TO_EMAIL` or `CONTACT_EMAIL` overrides from Vercel so they do not cause confusion. `RESEND_FROM_EMAIL` must use a domain verified with Resend, and the visitor's email is set as the reply-to address so enquiries can be answered directly. `BOOKING_URL` is optional; the booking button is hidden if it is empty.
 
 To enable delivery, create a Resend API key, add the sending domain in Resend, then publish the exact SPF and DKIM DNS records Resend provides at your domain's DNS host. Wait for Resend to verify both records before testing. Avoid adding a second SPF record if one already exists; merge SPF mechanisms into the existing record. A DMARC policy is also recommended.
 
