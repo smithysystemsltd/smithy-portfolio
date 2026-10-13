@@ -26,8 +26,11 @@ function isAllowedOption(value: string, options: readonly string[]): boolean {
 }
 
 function getRateLimitKey(request: Request): string {
+  const realIp = request.headers.get("x-real-ip")?.trim()
+  if (realIp) return realIp
+
   const forwardedFor = request.headers.get("x-forwarded-for")
-  return forwardedFor?.split(",")[0]?.trim() || request.headers.get("x-real-ip")?.trim() || "unknown"
+  return forwardedFor?.split(",")[0]?.trim() || "unknown"
 }
 
 function isRateLimited(key: string, now: number): boolean {
@@ -117,9 +120,10 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.RESEND_FROM_EMAIL
-  if (!apiKey || !from) {
+  const to = process.env.CONTACT_TO_EMAIL
+  if (!apiKey || !from || !to) {
     console.error(
-      "Contact email is not configured: set RESEND_API_KEY and RESEND_FROM_EMAIL.",
+      "Contact email is not configured: set RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_TO_EMAIL.",
     )
     return NextResponse.json(
       { error: "Email delivery is not configured." },
@@ -141,7 +145,7 @@ export async function POST(request: Request) {
   ].join("\n")
 
   const notification = {
-    to: [siteConfig.businessEmail],
+    to: [to],
     reply_to: email,
     subject: `New website enquiry from ${name}`,
     text: notificationText,
@@ -154,7 +158,7 @@ export async function POST(request: Request) {
       "",
       `Thanks for getting in touch with Smithy Systems. We have received your enquiry and will respond ${siteConfig.responseTimePromise.toLowerCase()}.`,
       "",
-      `If you need to reach us directly, email ${siteConfig.businessEmail}.`,
+      `If you need to reach us directly, email ${to}.`,
       "",
       "Smithy Systems",
     ].join("\n"),
