@@ -1,4 +1,5 @@
-const businessEmail = "hello@smithysystems.co.ke"
+const businessEmail =
+  process.env.CONTACT_TO_EMAIL?.trim() || "smithysystemsltd@gmail.com"
 const phone = {
   display: "+254 799 749 761",
   tel: "+254799749761",

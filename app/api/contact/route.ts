@@ -120,7 +120,7 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.RESEND_FROM_EMAIL
-  const to = process.env.CONTACT_TO_EMAIL
+  const to = siteConfig.businessEmail
   if (!apiKey || !from || !to) {
     console.error(
       "Contact email is not configured: set RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_TO_EMAIL.",

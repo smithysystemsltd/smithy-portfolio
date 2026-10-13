@@ -33,11 +33,12 @@ Set these environment variables in `.env.local` for local development and in the
 ```env
 RESEND_API_KEY=re_your_api_key
 RESEND_FROM_EMAIL=Website enquiries <contact@your-verified-domain.com>
+CONTACT_TO_EMAIL=smithysystemsltd@gmail.com
 BOOKING_URL=
 NEXT_PUBLIC_SITE_URL=https://smithysystems.vercel.app
 ```
 
-Set the same variables in Vercel Project Settings > Environment Variables for each deployment environment. Contact form enquiries and visitor acknowledgements use the business email configured in `config/site.ts`. Confirm that the mailbox receives mail before launch. Remove any legacy `CONTACT_TO_EMAIL` or `CONTACT_EMAIL` overrides from Vercel so they do not cause confusion. `RESEND_FROM_EMAIL` must use a domain verified with Resend, and the visitor's email is set as the reply-to address so enquiries can be answered directly. `BOOKING_URL` is optional; the booking button is hidden if it is empty.
+Set the same variables in Vercel Project Settings > Environment Variables for each deployment environment. `CONTACT_TO_EMAIL` is the single business email used for public contact details, structured data, enquiry notifications, and visitor acknowledgements; it defaults to `smithysystemsltd@gmail.com` if unset. Confirm that the mailbox receives mail before launch. `RESEND_FROM_EMAIL` must use a domain verified with Resend, and the visitor's email is set as the reply-to address so enquiries can be answered directly. `BOOKING_URL` is optional; the booking button is hidden if it is empty.
 
 Portfolio case studies are managed in `app/data/case-studies.ts`. Keep a study unpublished until its problem, solution, approved outcome, services, technology stack, timeline, at least one client-approved image, and written publication permission are verified. Unpublished studies are omitted from the case-study sitemap. Use `CASE_STUDY_TEMPLATE.md` to gather facts and written publication approval. When adding approved images, add descriptive alt text, clear the screenshot placeholder, and set both `published` and `publicationApproved` to `true`.
 
