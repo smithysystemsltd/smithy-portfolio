@@ -30,13 +30,7 @@ The contact form posts to `/api/contact` and sends an enquiry notification to th
 
 Set these environment variables in `.env.local` for local development and in the production hosting environment:
 
-```env
-RESEND_API_KEY=re_your_api_key
-RESEND_FROM_EMAIL=Website enquiries <contact@your-verified-domain.com>
-CONTACT_TO_EMAIL=smithysystemsltd@gmail.com
-BOOKING_URL=
-NEXT_PUBLIC_SITE_URL=https://smithysystems.vercel.app
-```
+
 
 Set the same variables in Vercel Project Settings > Environment Variables for each deployment environment. `CONTACT_TO_EMAIL` is the single business email used for public contact details, structured data, and enquiry notifications; it defaults to `smithysystemsltd@gmail.com` if unset. Confirm that the mailbox receives mail before launch. `RESEND_FROM_EMAIL` must use a domain verified with Resend; it does not need to be a mailbox you monitor. The visitor's email is set as the reply-to address so you can respond directly to their enquiry. `BOOKING_URL` is optional; the booking button is hidden if it is empty.
 
