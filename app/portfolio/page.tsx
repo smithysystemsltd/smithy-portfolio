@@ -8,10 +8,18 @@ const projects = [
 ]
 
 import { PortfolioProjects } from "@/app/portfolio/portfolio-projects"
+import { portfolioContent } from "@/app/data/case-studies"
+import { pageSeo } from "@/app/data/seo"
+import { BreadcrumbStructuredData } from "@/components/seo-structured-data"
+import { createPageMetadata } from "@/config/metadata"
+
+export const metadata = createPageMetadata(pageSeo.portfolio)
 
 export default function PortfolioPage() {
   return (
-    <main>
+    <>
+      <BreadcrumbStructuredData items={[{ name: "Home", path: "/" }, { name: "Portfolio", path: pageSeo.portfolio.path }]} />
+      <main>
       <section className="page-intro">
         <div className="shell">
           <p className="eyebrow">Selected work</p>
@@ -20,10 +28,12 @@ export default function PortfolioPage() {
         </div>
       </section>
       <section className="section">
-        <div className="shell">
+        <div className="shell" aria-labelledby="portfolio-projects-heading">
+          <h2 id="portfolio-projects-heading" className="sr-only">{portfolioContent.projectsHeading}</h2>
           <PortfolioProjects />
         </div>
       </section>
-    </main>
+      </main>
+    </>
   )
 }

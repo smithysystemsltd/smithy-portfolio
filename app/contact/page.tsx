@@ -1,6 +1,12 @@
 import { ContactForm } from "@/app/contact/contact-form"
 import { contactFormContent, getProjectTypeFromService } from "@/app/data/contact"
+import { pageSeo } from "@/app/data/seo"
+import { BreadcrumbStructuredData } from "@/components/seo-structured-data"
+import { createPageMetadata } from "@/config/metadata"
 import { siteConfig } from "@/config/site"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = createPageMetadata(pageSeo.contact)
 
 type ContactPageProps = {
   searchParams: Promise<{ service?: string | string[] }>
@@ -10,7 +16,9 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const params = await searchParams
   const service = Array.isArray(params.service) ? params.service[0] : params.service
   return (
-    <main>
+    <>
+      <BreadcrumbStructuredData items={[{ name: "Home", path: "/" }, { name: "Contact", path: pageSeo.contact.path }]} />
+      <main>
       <section className="page-intro">
         <div className="shell">
           <p className="eyebrow">Start a conversation</p>
@@ -69,6 +77,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           />
         </div>
       </section>
-    </main>
+      </main>
+    </>
   )
 }

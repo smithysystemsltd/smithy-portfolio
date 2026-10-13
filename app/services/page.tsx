@@ -1,14 +1,21 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { services, servicesPageContent } from "@/app/data/services"
+import { pageSeo } from "@/app/data/seo"
+import { BreadcrumbStructuredData } from "@/components/seo-structured-data"
 import { siteConfig } from "@/config/site"
+import { createPageMetadata } from "@/config/metadata"
+
+export const metadata = createPageMetadata(pageSeo.services)
 
 export default function ServicesPage() {
   const { introduction, servicesHeading, servicesIntroduction, howWeWork, engagementOptions, unsure } =
     servicesPageContent
 
   return (
-    <main>
+    <>
+      <BreadcrumbStructuredData items={[{ name: "Home", path: "/" }, { name: "Services", path: pageSeo.services.path }]} />
+      <main>
       <section className="page-intro">
         <div className="shell">
           <p className="eyebrow">{introduction.eyebrow}</p>
@@ -133,6 +140,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   )
 }

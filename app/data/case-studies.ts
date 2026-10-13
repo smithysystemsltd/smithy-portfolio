@@ -42,6 +42,7 @@ const missing = {
 export const caseStudyPlaceholders = missing
 
 export const portfolioContent = {
+  projectsHeading: "Browse projects",
   filterLabel: "Filter projects by industry",
   allIndustriesLabel: "All industries",
   previewPlaceholder: "Project preview",

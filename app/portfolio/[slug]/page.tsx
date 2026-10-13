@@ -1,7 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { caseStudies, isCaseStudyPublishable, portfolioContent, publishedCaseStudies } from "@/app/data/case-studies"
+import { BreadcrumbStructuredData } from "@/components/seo-structured-data"
+import { createPageMetadata } from "@/config/metadata"
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>
@@ -9,6 +12,22 @@ type CaseStudyPageProps = {
 
 export function generateStaticParams() {
   return publishedCaseStudies.map(({ slug }) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const study = caseStudies.find((item) => item.slug === slug && isCaseStudyPublishable(item))
+  if (!study) notFound()
+
+  const titleBase = `${study.title} | Product Case Study | Smithy Systems`
+  const title = titleBase.length < 50 ? `${titleBase} | Nairobi` : titleBase
+  const description = `Explore the ${study.title} case study from Smithy Systems, covering the project challenge, work delivered, and client-approved outcomes from Nairobi.`
+
+  return createPageMetadata({
+    title,
+    description,
+    path: `/portfolio/${study.slug}/`,
+  })
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
@@ -21,7 +40,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const image = study.images[0]
 
   return (
-    <main>
+    <>
+      <BreadcrumbStructuredData items={[
+        { name: "Home", path: "/" },
+        { name: "Portfolio", path: "/portfolio/" },
+        { name: study.title, path: `/portfolio/${study.slug}/` },
+      ]} />
+      <main>
       <section className="page-intro case-study-intro">
         <div className="shell">
           <p className="eyebrow">{study.industry}</p>
@@ -127,6 +152,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </section>
       )}
-    </main>
+      </main>
+    </>
   )
 }

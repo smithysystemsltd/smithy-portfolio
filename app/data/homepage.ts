@@ -1,8 +1,4 @@
 export const homepageContent = {
-  metadata: {
-    title: "Smithy Systems | Digital products for growing companies worldwide",
-    description: "Websites, apps, and business systems for growing companies worldwide, designed, built, and supported by one senior team.",
-  },
   hero: {
     eyebrow: "Technology partner / Nairobi, Kenya",
     title: "Websites, apps and business systems for growing companies worldwide.",

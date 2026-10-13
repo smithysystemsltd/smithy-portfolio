@@ -4,8 +4,10 @@ import { ArrowUpRight, MoveRight } from "lucide-react"
 import { caseStudies, caseStudyIndustries } from "@/app/data/case-studies"
 import { homepageContent } from "@/app/data/homepage"
 import { PortfolioCard } from "@/components/portfolio-card"
+import { createPageMetadata } from "@/config/metadata"
+import { pageSeo } from "@/app/data/seo"
 
-export const metadata: Metadata = homepageContent.metadata
+export const metadata: Metadata = createPageMetadata(pageSeo.home)
 
 export default function HomePage() {
   const { hero, whoWeHelp, services, selectedWork, differentiator } = homepageContent
