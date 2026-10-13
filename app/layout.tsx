@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
+import { ClosingCta } from "@/components/closing-cta"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <SiteHeader />
         {children}
+        <ClosingCta />
         <SiteFooter />
         <WhatsAppFloat />
       </body>

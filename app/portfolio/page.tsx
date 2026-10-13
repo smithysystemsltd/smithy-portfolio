@@ -7,9 +7,6 @@ const projects = [
   ["06", "Savanna Ops", "Agriculture / Systems", "One calm view across the moving parts of a growing agri-business."],
 ]
 
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
-import { portfolioContent } from "@/app/data/case-studies"
 import { PortfolioProjects } from "@/app/portfolio/portfolio-projects"
 
 export default function PortfolioPage() {
@@ -25,20 +22,6 @@ export default function PortfolioPage() {
       <section className="section">
         <div className="shell">
           <PortfolioProjects />
-        </div>
-      </section>
-      <section className="section section-tint portfolio-cta">
-        <div className="shell split">
-          <div>
-            <p className="eyebrow">Your next project</p>
-            <h2>{portfolioContent.portfolioCtaHeading}</h2>
-          </div>
-          <div>
-            <p>{portfolioContent.portfolioCtaCopy}</p>
-            <Link className="button button-dark" href="/contact">
-              {portfolioContent.portfolioCtaLink} <ArrowUpRight size={17} />
-            </Link>
-          </div>
         </div>
       </section>
     </main>
