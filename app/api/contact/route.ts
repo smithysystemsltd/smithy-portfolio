@@ -150,33 +150,20 @@ export async function POST(request: Request) {
     subject: `New website enquiry from ${name}`,
     text: notificationText,
   }
-  const acknowledgement = {
-    to: [email],
-    subject: "We received your enquiry",
-    text: [
-      `Hi ${name},`,
-      "",
-      `Thanks for getting in touch with Smithy Systems. We have received your enquiry and will respond ${siteConfig.responseTimePromise.toLowerCase()}.`,
-      "",
-      `If you need to reach us directly, email ${to}.`,
-      "",
-      "Smithy Systems",
-    ].join("\n"),
-  }
 
-  const results = await Promise.allSettled([
-    sendEmail(apiKey, from, notification),
-    sendEmail(apiKey, from, acknowledgement),
-  ])
-  const failures = results.filter(
-    (result) => result.status === "rejected" || !result.value.ok,
-  )
-  if (failures.length) {
+  try {
+    const result = await sendEmail(apiKey, from, notification)
+    if (!result.ok) {
+      console.error("Contact email delivery failed", `HTTP ${result.status}`)
+      return NextResponse.json(
+        { error: "We could not send your message. Please try again later." },
+        { status: 502 },
+      )
+    }
+  } catch (error) {
     console.error(
       "Contact email delivery failed",
-      failures.map((result) =>
-        result.status === "rejected" ? "network error" : `HTTP ${result.value.status}`,
-      ),
+      error instanceof Error ? error.message : "network error",
     )
     return NextResponse.json(
       { error: "We could not send your message. Please try again later." },
