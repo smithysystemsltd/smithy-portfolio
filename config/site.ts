@@ -13,7 +13,7 @@ export const siteConfig = {
     message: whatsappMessage,
   },
   phone,
-  location: "Nairobi, Kenya / Working across Africa",
+  location: "Nairobi, Kenya / Working worldwide",
   responseTimePromise: "Within one business day",
   socialUrls: {
     linkedin: null,

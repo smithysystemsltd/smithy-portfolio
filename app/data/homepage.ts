@@ -1,11 +1,11 @@
 export const homepageContent = {
   metadata: {
-    title: "Smithy Systems | Digital products for African businesses",
-    description: "Websites, apps, and business systems for growing African companies, designed, built, and supported by one senior team.",
+    title: "Smithy Systems | Digital products for growing companies worldwide",
+    description: "Websites, apps, and business systems for growing companies worldwide, designed, built, and supported by one senior team.",
   },
   hero: {
     eyebrow: "Technology partner / Nairobi, Kenya",
-    title: "Websites, apps and business systems for growing African companies.",
+    title: "Websites, apps and business systems for growing companies worldwide.",
     supportingCopy: "Move from a business challenge to a useful digital product with one senior team, fewer handoffs, and support beyond launch.",
     primaryCta: "Get a project estimate",
     secondaryCta: "See our work",
@@ -26,7 +26,7 @@ export const homepageContent = {
       {
         number: "02",
         title: "Business systems",
-        description: "Connected tools that help teams in Kenya and across Africa work with more clarity.",
+        description: "Connected tools that help distributed teams work with more clarity.",
       },
       {
         number: "03",
