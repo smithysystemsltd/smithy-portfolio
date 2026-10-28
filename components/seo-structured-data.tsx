@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site"
+import type { CaseStudy } from "@/app/data/case-studies"
 
 type BreadcrumbItem = {
   name: string
@@ -53,4 +54,29 @@ export function BreadcrumbStructuredData({ items }: { items: BreadcrumbItem[] })
   }
 
   return <JsonLd data={breadcrumbs} />
+}
+
+export function PortfolioStructuredData({
+  projects,
+}: {
+  projects: Pick<CaseStudy, "slug" | "title">[]
+}) {
+  const portfolioUrl = `${siteConfig.siteUrl}/portfolio/`
+  const collection = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Selected work | Smithy Systems",
+    url: portfolioUrl,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: project.title,
+        url: `${portfolioUrl}${project.slug}/`,
+      })),
+    },
+  }
+
+  return <JsonLd data={collection} />
 }

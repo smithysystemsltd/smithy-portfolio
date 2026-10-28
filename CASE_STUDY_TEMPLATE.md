@@ -10,6 +10,7 @@ Complete this with the client before changing the case study's `published` flag 
 - **Services provided:**
 - **One-line summary (client-approved):**
 - **Project start and launch dates / timeline:**
+- **Project year (confirm before publishing):**
 - **Technology stack (confirm with delivery team):**
 - **Live project URL (if public):**
 
@@ -46,5 +47,5 @@ For every proposed result, record the metric, unit, baseline, measurement period
 
 - Verify every statement against project records and client feedback.
 - Obtain written permission for the client's name, results, images, and any live link.
-- Add descriptive alt text for each approved image.
-- Populate the typed case-study record, set `publicationApproved` to `true`, and set `published` to `true` only after review.
+- Add the approved cover image, its real width and height, and descriptive alt text.
+- Populate the typed case-study record, set `publicationApproved` to `true`, and change `status` to `published` only after review.

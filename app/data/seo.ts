@@ -15,8 +15,8 @@ export const pageSeo = {
     path: "/services/",
   },
   portfolio: {
-    title: "Digital Product Portfolio in Nairobi | Smithy Systems",
-    description: "Explore Smithy Systems digital product work across commerce, health, operations, education, wellness and agriculture. Case studies are being prepared.",
+    title: "Selected Digital Product Work | Smithy Systems",
+    description: "Explore Smithy Systems project work across commerce, health, operations, education, wellness and agriculture, with project details and outcomes.",
     path: "/portfolio/",
   },
   contact: {

@@ -3,7 +3,7 @@ import Link from "next/link"
 import { ArrowUpRight, MoveRight } from "lucide-react"
 import { caseStudies, caseStudyIndustries } from "@/app/data/case-studies"
 import { homepageContent } from "@/app/data/homepage"
-import { PortfolioCard } from "@/components/portfolio-card"
+import { ProjectCard } from "@/components/project-card"
 import { createPageMetadata } from "@/config/metadata"
 import { pageSeo } from "@/app/data/seo"
 
@@ -71,8 +71,8 @@ export default function HomePage() {
             <h2 id="selected-work-title">{selectedWork.heading}</h2>
           </div>
           <div className="work-grid portfolio-grid">
-            {caseStudies.slice(0, 3).map((study) => (
-              <PortfolioCard key={study.slug} study={study} />
+            {caseStudies.slice(0, 3).map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
           <div className="section-cta">

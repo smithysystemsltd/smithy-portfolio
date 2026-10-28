@@ -5,8 +5,7 @@ const phone = {
   tel: "+254799749761",
 }
 const whatsappMessage = "Hi Smithy Systems, I'd like to discuss a project."
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://smithysystems.vercel.app")
-  .trim()
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://smithysystems.co.ke")
   .replace(/\/+$/, "")
 const socialUrls: Record<"linkedin" | "github", string | null> = {
   linkedin: null,
@@ -29,6 +28,8 @@ export const siteConfig = {
   location: "Nairobi, Kenya / Working worldwide",
   responseTimePromise: "Within one business day",
   socialUrls,
-  bookingUrl: process.env.BOOKING_URL?.trim() ?? "",
+  bookingUrl:
+    process.env.BOOKING_URL?.trim() ||
+    "https://cal.com/smithysystems-3cep9g/30min",
   bookingLabel: "Book a free 30-minute call",
 } as const

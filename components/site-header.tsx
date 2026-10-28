@@ -18,7 +18,7 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="shell nav-wrap">
         <Link href="/" className="brand" onClick={() => setOpen(false)}>
-          <span className="brand-logo"><Image src="/images/logos/smithynobg.png" alt="Smithy Systems" width={180} height={180} priority /></span>
+          <span className="brand-logo"><Image src="/images/logos/smithynobg.png" alt="Smithy Systems" width={180} height={180} sizes="190px" priority /></span>
           <span className="sr-only">Smithy Systems</span>
         </Link>
         <nav className={open ? "main-nav open" : "main-nav"}>

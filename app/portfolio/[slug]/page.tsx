@@ -1,9 +1,11 @@
-import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { caseStudies, isCaseStudyPublishable, portfolioContent, publishedCaseStudies } from "@/app/data/case-studies"
+import { caseStudies, isCaseStudyPublishable, publishedCaseStudies } from "@/app/data/case-studies"
+import { portfolioContent } from "@/app/data/portfolio-content"
 import { BreadcrumbStructuredData } from "@/components/seo-structured-data"
+import { ProjectCard } from "@/components/project-card"
+import { ProjectVisual } from "@/components/project-visual"
 import { createPageMetadata } from "@/config/metadata"
 
 type CaseStudyPageProps = {
@@ -37,7 +39,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   if (!study) notFound()
 
   const relatedStudies = publishedCaseStudies.filter((item) => item.slug !== study.slug)
-  const image = study.images[0]
+  const image = study.coverImage
 
   return (
     <>
@@ -62,21 +64,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       <section className="section">
         <div className="shell case-study-content">
-          <div className="case-study-feature">
-            {image ? (
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                priority
-                sizes="(max-width: 760px) 100vw, 1180px"
-              />
-            ) : (
-              <div className="work-card-placeholder">
-                <span>{portfolioContent.previewPlaceholder}</span>
-              </div>
-            )}
-          </div>
+          <ProjectVisual
+            image={image}
+            priority
+            sizes="(max-width: 760px) 100vw, 900px"
+            className="case-study-feature"
+          />
 
           <section className="case-study-section">
             <p className="eyebrow">01 / Context</p>
@@ -138,15 +131,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <section className="section section-tint">
           <div className="shell">
             <div className="section-heading"><h2>{portfolioContent.relatedHeading}</h2></div>
-            <div className="work-grid portfolio-grid">
+            <div className="work-grid portfolio-grid project-grid">
               {relatedStudies.slice(0, 3).map((related) => (
-                <article className="work-card portfolio-card" key={related.slug}>
-                  <Link href={`/portfolio/${related.slug}`} className="related-project-link">
-                    <span className="work-meta">{related.industry}</span>
-                    <h3>{related.title}</h3>
-                    <p>{related.summary}</p>
-                  </Link>
-                </article>
+                <ProjectCard key={related.slug} project={related} />
               ))}
             </div>
           </div>
